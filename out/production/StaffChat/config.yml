@@ -1,0 +1,19 @@
+# Type your message between "". For Color Codes use &
+# Reload Message is sent when you do /schatrl to reload the config.yml
+reload-message: "&aReloaded!"
+# chat prefix is what indicates that the user is getting a message from staff chat
+chat-prefix: "&4Staff Chat>"
+
+# Prefixes will only work in staff chat and not regular chat
+prefix:
+  owner: "&4Owner"
+  admin: "&cAdmin"
+  mod: "&2Mod"
+  helper: "&9Helper"
+  custom1: "&1Custom"
+  custom2: "&2Custom"
+  custom3: "&3Custom"
+  custom4: "&4Custom"
+# Default appears when a player talks in staff chat without the permission to use any prefix
+  default: "&7Default"
+
