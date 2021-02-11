@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="StaffChat">
+    <output-path>D:/Arjun/Games/Servers/Plugin testing/plugins</output-path>
+    <root id="archive" name="StaffChat.jar">
+      <element id="module-output" name="StaffChat" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/plugin.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/config.yml" />
+    </root>
+  </artifact>
+</component>
