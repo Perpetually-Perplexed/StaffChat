@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class Events implements Listener {
@@ -21,13 +22,13 @@ public class Events implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
         Player Chatter = event.getPlayer();
-        if (!(instance.UsePlayers.contains(Chatter))) return;
+        if (!(instance.UsePlayers.contains(Utils.getChatterAsPlayer(Chatter)))) return;
         event.setCancelled(true);
         String Prefix = Utils.getPermission(Chatter);
-        for (Player Staff : instance.UsePlayers) {
-
+        for (Chatter staffC : instance.UsePlayers) {
+            Player Staff = staffC.getUser();
             Staff.sendMessage(ChatColor.translateAlternateColorCodes('&', instance.inStaff + "&r" + Prefix + " "+ Chatter.getName() + ChatColor.WHITE +": " + event.getMessage()));
-            if (!(Staff == Chatter)) {
+            if (!(Staff == Chatter) && staffC.soundsToggled()) {
                 // /playsound minecraft:entity.arrow.hit_player ambient PerplexedPerson ~~~10 1
                 Staff.playSound(Staff.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 10, 1);
             }
@@ -37,6 +38,13 @@ public class Events implements Listener {
 
     @EventHandler
     public void playerLeaveEvent(PlayerQuitEvent event) {
-        instance.UsePlayers.remove(event.getPlayer());
+        instance.UsePlayers.remove(Utils.getChatterAsPlayer(event.getPlayer()));
+    }
+
+    @EventHandler
+    public void playerJoinEvent(PlayerJoinEvent event) {
+        if (event.getPlayer().hasPermission("StaffChat.use")) {
+            instance.UsePlayers.add(new Chatter(event.getPlayer(),true,false,true));
+        }
     }
 }

@@ -1,8 +1,10 @@
 package me.PerpetuallyPerplexed.StaffChat;
 
 
+import me.PerpetuallyPerplexed.StaffChat.Utils.Chatter;
 import me.PerpetuallyPerplexed.StaffChat.Utils.Events;
 import me.PerpetuallyPerplexed.StaffChat.Utils.MegaCommand;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -14,7 +16,7 @@ import java.util.List;
 
 public class Main extends JavaPlugin implements Listener {
 
-    public List<Player> UsePlayers = new ArrayList<>();
+    public List<Chatter> UsePlayers = new ArrayList<>();
     public String inStaff = ChatColor.DARK_RED + "Staff Chat> ";
     private static Main instance;
 
@@ -23,6 +25,11 @@ public class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
         getLogger().info(ChatColor.GREEN + "StaffChat " + getDescription().getVersion() + " by PerpetuallyPerplexed has been enabled");
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (p.hasPermission("StaffChat.use")) {
+                UsePlayers.add(new Chatter(p,true,false,true));
+            }
+        }
         loadConfig();
         new MegaCommand(this);
         new Events(this);

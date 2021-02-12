@@ -52,4 +52,15 @@ public class Utils {
 
         return instance.getConfig().getString("prefix.default");
     }
+
+
+    public static Chatter getChatterAsPlayer(Player player) {
+        for (Chatter c : instance.UsePlayers) {
+            if (c.getUser().equals(player)) {
+                return c;
+            }
+        }
+
+        return null;
+    }
 }
