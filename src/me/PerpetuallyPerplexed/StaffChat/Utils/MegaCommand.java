@@ -25,13 +25,17 @@ public class MegaCommand implements CommandExecutor {
             return true;
         }
         Player senderPlayer = (Player) sender;
-        if (!(senderPlayer.hasPermission("schat.use"))) {
+        if (!(senderPlayer.hasPermission("StaffChat.use"))) {
             senderPlayer.sendMessage(ChatColor.RED + "You don't have permission to use this command!");
             return true;
         }
         String Prefix = Utils.getPermission(senderPlayer);
         if (args.length < 1) {
-            senderPlayer.sendMessage(ChatColor.RED + "Usage: /staffchat <toggle/your message>");
+            if (senderPlayer.hasPermission("StaffChat.reload")) {
+                senderPlayer.sendMessage(ChatColor.RED + "Usage: /staffchat <toggle/<message>/reload>");
+                return true;
+            }
+            senderPlayer.sendMessage(ChatColor.RED + "Usage: /staffchat <toggle/<message>");
             return true;
         }
 
@@ -54,6 +58,10 @@ public class MegaCommand implements CommandExecutor {
                 }
                 break;
             case "reload":
+                if (!(senderPlayer.hasPermission("StaffChat.reload"))) {
+                    senderPlayer.sendMessage(ChatColor.RED + "You don't have permission  to do this command!");
+                    return true;
+                }
                 instance.loadConfig();
                 //noinspection ConstantConditions
                 senderPlayer.sendMessage(instance.getConfig().getString("reload-message"));

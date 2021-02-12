@@ -40,6 +40,10 @@ public class Main extends JavaPlugin implements Listener {
         // LoadConfig
 
         this.saveDefaultConfig();
+        if (validConfig()) {
+            getLogger().warning("Invalid Character in config!");
+            return;
+        }
         inStaff = this.getConfig().getString("chat-prefix");
         inStaff = ChatColor.translateAlternateColorCodes('&', inStaff + " ");
 
