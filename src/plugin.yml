@@ -2,30 +2,43 @@ main: me.PerpetuallyPerplexed.StaffChat.Main
 version: 1.0
 name: StaffChat
 author: PerpetullyPerplexed
+
+api-version: 1.13
+
 commands:
-  sctog:
-    description: Toggle StaffChat
-  StaffChatrl:
-    description: Reloads config.yml
+  staffchat:
+    description: Toggles
+    aliases: sc
+
+
 permissions:
   StaffChat.use:
    description: Use Staff Chat
+
   StaffChat.reload:
     description: Staff Chat config.yml
+
   StaffChat.custom1:
     description: Get a custom prefix in the staff chat
+
   StaffChat.helper:
     description: Get a helper prefix in the staff chat
+
   StaffChat.custom2:
     description: Get a custom prefix in the staff chat
+
   StaffChat.mod:
     description: Get a moderator prefix in the staff chat
+
   StaffChat.custom3:
     description: Get a custom prefix in the staff chat
+
   StaffChat.admin:
     description: Get an admin prefix in the staff chat
+
   StaffChat.custom4:
     description: Get a custom prefix in the staff chat
+
   StaffChat.owner:
     description: Get an owner prefix in the staff chat
 
