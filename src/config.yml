@@ -2,10 +2,12 @@
 
 
 
-# Reload Message is sent when you do /staffchat reload to reload the config.yml
+# Reload Message is sent when you reload config.yml
 reload-message: "&aReloaded!"
+
 # chat prefix is what indicates that the user is getting a message from staff chat
 chat-prefix: "&4Staff Chat>"
+
 
 # Prefixes will only work in staff chat and not regular chat
 prefix:
@@ -19,4 +21,16 @@ prefix:
   custom4: "&4Custom"
 # Default appears when a player talks in staff chat without the permission to use any prefix
   default: "&7Default"
+
+# This is how the player needs to type the rank name
+report-method:
+  owner: "Owner"
+  admin: "Admin"
+  mod: "Mod"
+  helper: "Helper"
+  custom1: "Custom1"
+  custom2: "Custom2"
+  custom3: "Custom3"
+  custom4: "Custom4"
+  default: "Default"
 

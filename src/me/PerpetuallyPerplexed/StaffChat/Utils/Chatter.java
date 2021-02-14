@@ -8,6 +8,8 @@ public class Chatter  {
     private boolean canSee;
     private boolean messageToggled;
     private boolean sounds;
+    private boolean inSettings = false;
+    private String rank;
 
 
     public Chatter(Player user,boolean canSee,boolean messageToggled,boolean sounds) {
@@ -15,6 +17,7 @@ public class Chatter  {
         this.canSee = canSee;
         this.messageToggled = messageToggled;
         this.sounds = sounds;
+
     }
 
     public boolean canSee() {
@@ -35,6 +38,14 @@ public class Chatter  {
 
     public void setCanSee(boolean canSee) {
         this.canSee = canSee;
+    }
+
+    public boolean inSettings() {
+        return inSettings;
+    }
+
+    public void setSettings(boolean inSettings) {
+        this.inSettings = inSettings;
     }
 
     public void setMessageToggled(boolean messageToggled) {

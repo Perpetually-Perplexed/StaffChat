@@ -24,7 +24,6 @@ public class Main extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         instance = this;
-        getLogger().info(ChatColor.GREEN + "StaffChat " + getDescription().getVersion() + " by PerpetuallyPerplexed has been enabled");
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (p.hasPermission("StaffChat.use")) {
                 UsePlayers.add(new Chatter(p,true,false,true));
@@ -47,7 +46,7 @@ public class Main extends JavaPlugin implements Listener {
         // LoadConfig
 
         this.saveDefaultConfig();
-        if (validConfig()) {
+        if (!validConfig()) {
             getLogger().warning("Invalid Character in config!");
             return;
         }
@@ -55,15 +54,6 @@ public class Main extends JavaPlugin implements Listener {
         inStaff = ChatColor.translateAlternateColorCodes('&', inStaff + " ");
 
     }
-
-
-
-
-
-
-
-
-
     private boolean validConfig() {
         try {
             this.reloadConfig();

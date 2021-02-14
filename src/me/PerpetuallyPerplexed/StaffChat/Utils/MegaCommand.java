@@ -3,6 +3,8 @@ package me.PerpetuallyPerplexed.StaffChat.Utils;
 import me.PerpetuallyPerplexed.StaffChat.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -43,27 +45,14 @@ public class MegaCommand implements TabExecutor {
         }
 
         switch (args[0]) {
-            case "see":
-                if (instance.UsePlayers.contains(Utils.getChatterAsPlayer(senderPlayer))) {
-                    for (Chatter staff : instance.UsePlayers) {
-                        Player playerStaff = staff.getUser();
+            case "settings":
 
-                        playerStaff.sendMessage(ChatColor.translateAlternateColorCodes('&', instance.inStaff + Prefix + " " + senderPlayer.getName() + " &aleft your chat!"));
-                    }
+                //noinspection ConstantConditions
+                GUI gui = new GUI(Utils.getChatterAsPlayer(senderPlayer));
+                //noinspection ConstantConditions
+                Utils.getChatterAsPlayer(senderPlayer).setSettings(true);
+                gui.openGUI();
 
-                    instance.UsePlayers.remove(Utils.getChatterAsPlayer(senderPlayer));
-                    return true;
-                }
-                // Add to Schat
-                instance.UsePlayers.add(new Chatter(senderPlayer,true,false,true));
-                for (Chatter staffChatter : instance.UsePlayers) {
-                    Player staff = staffChatter.getUser();
-                    staff.sendMessage(ChatColor.translateAlternateColorCodes('&', instance.inStaff + Prefix + " " + senderPlayer.getName() + " &ajoined your chat!"));
-                    // /playsound minecraft:entity.player.levelup ambient PerplexedPerson ~ ~ ~ 10 2
-                    if (staffChatter.soundsToggled()) {
-                        staff.playSound(staff.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 10, 2);
-                    }
-                }
                 break;
             case "reload":
                 if (!(senderPlayer.hasPermission("StaffChat.reload"))) {
@@ -73,6 +62,9 @@ public class MegaCommand implements TabExecutor {
                 instance.loadConfig();
                 //noinspection ConstantConditions
                 senderPlayer.sendMessage(instance.getConfig().getString("reload-message"));
+                break;
+            case "report":
+
                 break;
             default:
                 String message;
@@ -103,8 +95,8 @@ public class MegaCommand implements TabExecutor {
         if (!sender.hasPermission("StaffChat.use")) {
             return returnValue;
         }
-        returnValue.add("toggle");
-        returnValue.add("see");
+        returnValue.add("settings");
+        returnValue.add("report");
         if (sender.hasPermission("StaffChat.reload")) {
             returnValue.add("reload");
         }
@@ -117,6 +109,11 @@ public class MegaCommand implements TabExecutor {
             }
             return otherReturn;
         }
+
+        if (args[0].equalsIgnoreCase("report")) {
+            return Utils.getReportableNamesList();
+        }
+
         return returnValue;
     }
 }
